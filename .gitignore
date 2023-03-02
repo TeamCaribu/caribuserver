@@ -1,7 +1,4 @@
 node_modules/
 package-lock.json
-originalAppTree.json
-renamedAppTree.json
 server/process/
-server/originalAppTree.json
-server/renamedAppTree.json
+server/.DS_Store
