@@ -1,3 +1,12 @@
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var fs = require('fs');
 var parser = require('@babel/parser');
 // const { babel, parse } = require('@babel/core')
@@ -39,7 +48,9 @@ var addCloseExport = function (req, res, next) {
                 // console.log(path)
                 console.log("PATH.NODE:");
                 console.log(path);
-                path.replaceWith(t.callExpression(t.memberExpression(t.callExpression(path.node.callee, path.node.arguments), t.identifier('close')), []));
+                var newArgs = __spreadArray([], path.node.arguments, true);
+                newArgs[0] = t.numericLiteral(3033);
+                path.replaceWith(t.callExpression(t.memberExpression(t.callExpression(path.node.callee, newArgs), t.identifier('close')), []));
                 closeAppOnce = false;
                 // console.log("PATH.PARENT:")
                 // console.log(path.parentPath)
